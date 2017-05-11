@@ -32,6 +32,32 @@ const mutation = new GraphQLObjectType({
                 //this signup logic is well abstracted - graphql strength
                 return AuthService.signup({ email, password, req });
             }
+        },
+        //This mutation runs through Passport to logout 
+        logout: {
+            type: UserType,
+            resolve(parentValue, args, req) {
+                // save a reference to the user property 
+                const { user } = req;
+                //Calling req.logout removes user property from the request object
+                //logging out the user
+                req.logout();
+                //returning the user which is logged out
+                return user;
+            }
+        },
+        login: {
+            //login mutation will return a usertype
+            type: UserType,
+            //the arguments the mutation takes for the user to login
+            args: {
+                email: { type: GraphQLString },
+                password: { type: GraphQLString }
+            },
+            //returns a promise to the auth service which glues together Passport.js authentication
+            resolve(parentValue, { email, password }, req) {
+                return AuthService.login({ email, password, req })
+            }
         }
     }
 });
