@@ -2,7 +2,8 @@
 const graphql = require('graphql');
 const {
     GraphQLObjectType,
-    GraphQLString
+    GraphQLString,
+    GraphQLID
 } = graphql;
 
 //Base UserType - A type is a collection of data in your DB
@@ -11,6 +12,9 @@ const {
 const UserType = new GraphQLObjectType({
     name: 'UserType',
     fields: {
+        //unique id for objects, so that when brought to the front, the unique ID in apollo
+        //can be checked, and if it's repeated, will be stored in local cache
+        id: { type: GraphQLID },
         email: { type: GraphQLString }
     }
 });
