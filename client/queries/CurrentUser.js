@@ -1,0 +1,11 @@
+//responsible for getting the current user of the session
+import gql from 'graphql-tag';
+
+export default gql`
+    {
+    user {
+        id
+        email
+        }
+    }
+`;
