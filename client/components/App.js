@@ -5,7 +5,7 @@ import Header from './Header';
 //No component level state so it's a functional component
 const App = (props) => {
     return (
-        <div>
+        <div className="container">
             <Header />
             {/*Always pass props to children just in case we get some*/}
             {props.children}
