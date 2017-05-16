@@ -7,12 +7,16 @@ import AuthForm from './AuthForm';
 import loginMutation from '../mutations/Login';
 import { graphql } from 'react-apollo';
 
+import currentUserQuery from '../queries/CurrentUser';
+
 class LoginForm extends Component {
 
     //callback to grab authform values when submitted - pass this function to the authform child component
     onSubmit({ email, password }) {
         this.props.mutate({
-            variables: { email, password }
+            variables: { email, password },
+            // to redo queries which may cause other mutations throughout the app - in this case the header
+            refetchQueries: [{ query: currentUserQuery }]
         });
     }
 
