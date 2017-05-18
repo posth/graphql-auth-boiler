@@ -6,7 +6,7 @@ class AuthForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: '', password: ''};
+        this.state = { email: '', password: '' };
     }
 
     onSubmit(event) {
@@ -25,19 +25,24 @@ class AuthForm extends Component {
                 {/*The onsubmit here is within the context of the Authform and not the LoginForm!*/}
                 <form onSubmit={this.onSubmit.bind(this)} className="col s4">
                     <div className="input-field">
-                        <input 
+                        <input
                             placeholder="Email"
                             value={this.state.email}
                             onChange={event => this.setState({ email: event.target.value })}
                         />
                     </div>
                     <div className="input-field">
-                        <input 
+                        <input
                             placeholder="Password"
                             type="password"
                             value={this.state.password}
                             onChange={event => this.setState({ password: event.target.value })}
                         />
+                    </div>
+                    {/*For possible error feedback - for every error we create a div with the error's content
+                     adding a key as it is a list - unique identifier is the error */}
+                    <div className="errors">
+                        {this.props.errors.map(error => <div key={error}>{error}</div>)}
                     </div>
                     <button className="btn">Submit</button>
                 </form>
