@@ -12,6 +12,7 @@ import { Router, hashHistory, Route, Indexroute } from 'react-router';
 //Components
 import App from './components/App';
 import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 
 //* by default graphQL doesn't attach cookie information to the request
 //GraphiQL DOES attach cookies with the request object to identify with the backend in the case of user auth
@@ -47,6 +48,7 @@ const Root = () => {
         {/*Base component is App*/}
         <Route path="/" component={App}>
           <Route path="login" component={LoginForm} />
+          <Route path="signup" component={SignupForm} />
         </Route>
       </Router>
     </ApolloProvider>
