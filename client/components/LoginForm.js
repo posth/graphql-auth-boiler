@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 
 //child component
 import AuthForm from './AuthForm';
@@ -7,6 +8,7 @@ import AuthForm from './AuthForm';
 import loginMutation from '../mutations/Login';
 import { graphql } from 'react-apollo';
 
+//querries
 import currentUserQuery from '../queries/CurrentUser';
 
 class LoginForm extends Component {
@@ -16,6 +18,17 @@ class LoginForm extends Component {
         super(props);
 
         this.state = { errors: [] };
+    }
+
+    //lifecycle hook - whenever component is about to be rerendered than this function is called
+    componentWillUpdate(nextProps) {
+        //nextprops passed in are the props passed to the component as it's about to be rerendered
+        // this.props //old props
+        // nextProps //next incoming props that will rerender the component
+        if (!this.props.data.user && nextProps.data.user) {
+            //redirect to the dashboard
+            hashHistory.push('/dashboard');
+        }
     }
 
     //callback to grab authform values when submitted - pass this function to the authform child component
@@ -48,4 +61,6 @@ class LoginForm extends Component {
     }
 }
 
-export default graphql(loginMutation)(LoginForm);
+export default graphql(currentUserQuery)(
+    graphql(loginMutation)(LoginForm)
+);
