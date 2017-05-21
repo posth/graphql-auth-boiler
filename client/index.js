@@ -15,6 +15,9 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import DashboardComponent from './components/Dashboard';
 
+//higher order comp for user authentication
+import requireAuth from './components/requireAuth';
+
 //* by default graphQL doesn't attach cookie information to the request
 //GraphiQL DOES attach cookies with the request object to identify with the backend in the case of user auth
 //need to add config to graphQL to add cookies to request
@@ -50,7 +53,8 @@ const Root = () => {
         <Route path="/" component={App}>
           <Route path="login" component={LoginForm} />
           <Route path="signup" component={SignupForm} />
-          <Route path="dashboard" component={DashboardComponent} />
+          {/*applying higher order require auth component to the dashboard component*/}
+          <Route path="dashboard" component={requireAuth(DashboardComponent)} />
         </Route>
       </Router>
     </ApolloProvider>

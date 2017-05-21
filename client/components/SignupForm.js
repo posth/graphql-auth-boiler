@@ -29,7 +29,7 @@ class SignupForm extends Component {
         }
     }
 
-    //callback function to passed down to the child component
+    //callback function to pass down to the child component
     onSubmit({ email, password }) {
         this.props.mutate({
             variables: { email, password },
